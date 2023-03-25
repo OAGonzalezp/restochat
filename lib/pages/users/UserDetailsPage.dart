@@ -1,25 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:resto_chat/pages/users/UsersPage.dart';
-import 'package:resto_chat/pages/home/tabs/explore_tab.dart';
+import 'package:resto_chat/models/user/user.dart';
 import 'package:resto_chat/pages/home/tabs/notification_tab.dart';
+import 'package:resto_chat/pages/users/UsersPage.dart';
 import 'package:resto_chat/screens/MedicinesScreen.dart';
 import 'package:resto_chat/themes.dart';
 import 'package:resto_chat/utils/Singleton.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class UserDetailsPage extends StatefulWidget {
+  final User user;
+  const UserDetailsPage({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UserDetailsPage> createState() => _UserDetailsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final tabs = <Widget>[
-    UsersPage(),
-    NotificationTab()
-  ];
+class _UserDetailsPageState extends State<UserDetailsPage> {
 
   late PageController _pageController;
   int currentTab = 0;
@@ -34,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: 1);
+    _pageController = PageController(initialPage: 0);
 
     super.initState();
   }
@@ -43,8 +39,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Singleton().getBGColor(),
+      appBar: appBar(),
+      body: body(),
+    );
+  }
+
+  PreferredSizeWidget appBar() {
+    return AppBar(
+      backgroundColor: Singleton().getProfileColor(),
+      elevation: 2,
+      title: Text(widget.user.name),
+    );
+  }
+
+  Scaffold body() {
+    return Scaffold(
+      backgroundColor: Singleton().getBGColor(),
       body: PageView(
-        children: tabs,
+        children: [
+          MedicinesScreen(user: widget.user),
+          UsersPage(),
+          NotificationTab()
+        ],
         controller: _pageController,
       ),
       bottomNavigationBar: BottomAppBar(
@@ -67,12 +83,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
   Widget _bottomAppBarItem({icon, page}) {
     return IconButton(
       splashRadius: 20,
       onPressed: () => goToTab(page),
       icon: Icon(
-        icon, 
+        icon,
         color: currentTab == page ? kDarkActiveColor : Colors.blueGrey.shade200,
         size: 22,
       ),

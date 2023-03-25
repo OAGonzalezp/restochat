@@ -27,7 +27,7 @@ class SplashScreenState extends State<AnimatedSplashScreen>
   }
 
   void navigationPage() {
-    Navigator.of(context).pushReplacementNamed(HOME_SCREEN);
+    Navigator.of(context).pushReplacementNamed(USERS_SCREEN);
   }
 
   @override
@@ -62,18 +62,6 @@ class SplashScreenState extends State<AnimatedSplashScreen>
                 width: animation.value * 250,
                 height: animation.value * 250,
               ),
-              const Text("RestoChat"
-                , style:
-                TextStyle(
-                  color: kWhiteColor,
-                  fontSize: 20
-                ),
-              ),
-              Icon(
-                Icons.dark_mode_sharp,
-                color: Singleton().getActive2Color(),
-                size: 22,
-              )
             ],
           ),
         ],

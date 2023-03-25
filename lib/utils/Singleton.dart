@@ -54,4 +54,21 @@ class Singleton {
   Color getActive2Color() {
     return darkMode ? kDarkActiveColor : kLightActiveColor;
   }
+
+  static LinearGradient getDarkLinearGradient(MaterialColor color) {
+    return LinearGradient(
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
+      colors: [
+        color[600]!.withOpacity(0.7),
+        color[500]!.withOpacity(0.7),
+        color[400]!.withOpacity(0.7),
+      ],
+      stops: const [
+        0.2,
+        0.5,
+        1,
+      ],
+    );
+  }
 }

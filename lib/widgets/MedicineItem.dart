@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resto_chat/themes.dart';
 
-class ChatItem extends StatelessWidget {
+class MedicineItem extends StatelessWidget {
   final Widget widget;
   final String initial;
   final String title;
@@ -11,8 +11,9 @@ class ChatItem extends StatelessWidget {
   final bool mute;
   final int unread;
   final Color color;
+  final Function onTap;
 
-  const ChatItem({
+  const MedicineItem({
     Key? key,
     required this.widget,
     required this.initial,
@@ -23,12 +24,15 @@ class ChatItem extends StatelessWidget {
     required this.mute,
     required this.unread,
     required this.color,
+    required this.onTap
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: (){
+        onTap();
+      },
       contentPadding: const EdgeInsets.symmetric(horizontal: defaultMargin),
       leading: CircleAvatar(
         backgroundColor: color,

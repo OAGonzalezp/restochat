@@ -47,6 +47,9 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   avatar_glow: ^2.0.2
   animated_text_kit: ^4.2.2
+  http: ^0.13.5
+  flutter_cached_pdfview: ^0.4.1
+  internet_file: ^1.2.0
 
 dev_dependencies:
   flutter_test:

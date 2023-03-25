@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:resto_chat/models/story/story.dart';
+import 'package:resto_chat/models/user/documentType.dart';
+import 'package:resto_chat/models/user/eps.dart';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
@@ -10,45 +11,51 @@ class User {
   User({
     required this.id,
     required this.name,
-    required this.email,
+    required this.documentType,
+    required this.document,
+    required this.eps,
     required this.profile,
-    this.stories,
   });
 
   int id;
   String name;
-  String email;
+  String document;
+  String documentType;
+  SuperSalud eps;
   String profile;
-  List<Story>? stories;
 
   User copyWith({
     required int id,
     required String name,
-    required String email,
+    required String documentType,
+    required String document,
+    required SuperSalud eps,
     required String profile,
-    List<Story>? stories,
-  }) => 
+  }) =>
     User(
       id: id,
       name: name,
-      email: email,
+      documentType: documentType,
+      document: document,
+      eps: eps,
       profile: profile,
-      stories: stories,
     );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
     name: json["name"],
-    email: json["email"],
+    document: json["document"],
+    documentType: json["documentType"],
+    eps: json["eps"],
     profile: json["profile"],
-    stories: List<Story>.from(json["stories"].map((x) => Story.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "email": email,
+    "documentType": documentType,
+    "document": document,
+    "eps": eps,
     "profile": profile,
-    "stories": List<dynamic>.from(stories!.map((x) => x.toJson())),
   };
 }
